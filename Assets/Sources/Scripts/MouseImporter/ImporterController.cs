@@ -20,6 +20,7 @@ namespace MerJame.Importer
         {
             _mouseDestroyer = new MouseDestroyer();
             _mouseImported = new List<Mouse>();
+            _view.Init(_importCount);
 
             _zone.Entered += OnEntered;
             _zone.Exited += OnExited;

@@ -12,6 +12,8 @@ namespace MerJame.PlayerSystem
         private MouseSpawnerController _mouseSpawner;
         private MouseGhost _mouseGhost;
 
+        public int MouseCount => _movements.Count;
+
         public void Init(MouseSpawnerController mouseSpawner, MouseGhost mouseGhost)
         {
             _mouseSpawner = mouseSpawner;

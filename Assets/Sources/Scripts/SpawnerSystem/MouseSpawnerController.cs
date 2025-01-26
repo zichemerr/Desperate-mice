@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using MerJame.PlayerSystem;
+using MerJame.Obstacle;
 using System;
 
 namespace MerJame.Spawning
@@ -11,12 +12,14 @@ namespace MerJame.Spawning
         [SerializeField] private Mouse _mousePrefab;
 
         private MouseSpawner _spawner;
+        private Box _box;
 
         public event Action<Mouse> Spawned;
 
-        public void Init()
+        public void Init(Box box)
         {
             _spawner = new MouseSpawner(_mousePrefab);
+            _box = box;
             Spawn(_spawner.Spawn(), _spawnPoint.position);
 
             foreach (var pointSpawner in _pointSpawner)
@@ -40,6 +43,7 @@ namespace MerJame.Spawning
             }
 
             pointSpawner.Entered -= OnEntered;
+            _box.Enable();
         }
 
         private void Spawn(Mouse mouse, Vector2 position)
