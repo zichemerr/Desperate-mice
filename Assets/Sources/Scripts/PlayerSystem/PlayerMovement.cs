@@ -53,5 +53,10 @@ namespace MerJame.PlayerSystem
                 movement.Move(position);
             }
         }
+
+        public Mouse GetMouse(int index)
+        {
+            return _movements[index];
+        }
     }
 }

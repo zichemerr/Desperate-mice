@@ -3,41 +3,47 @@ using MerJame.PlayerSystem;
 using MerJame.Obstacle;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using MerJame.LevelSystem;
 
 namespace MerJame.FinishDoor
 {
     public class ExitDoor : MonoBehaviour
     {
-        private ImporterController _importer;
-        private Box _box;
-        private bool _importerIsAssebled = false;
+        [SerializeField] private SpriteRenderer _sprite;
 
-        public void Init(ImporterController mouseImporter, Box box)
+        private Level _level;
+        private MouseDestroyer _mouseDestroyer;
+        private Box _box;
+        private bool _MouseIsAlived = false;
+
+        public void Init(Level level, MouseDestroyer mouseDestroyer, Box box)
         {
-            _importer = mouseImporter;
+            _level = level;
+            _mouseDestroyer = mouseDestroyer;
             _box = box;
-            _importer.Assembled += OnAssembled;
+            mouseDestroyer.AllDestroyed += OnAllDestroyed;
         }
 
         private void OnDisable()
         {
-            _importer.Assembled -= OnAssembled;
+            _mouseDestroyer.AllDestroyed -= OnAllDestroyed;
         }
 
-        private void OnAssembled()
+        private void OnAllDestroyed()
         {
-            _importerIsAssebled = true;
+            _sprite.color = Color.black;
+            _MouseIsAlived = true;
             _box.Disable();
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (_importerIsAssebled == false)
+            if (_MouseIsAlived == false)
                 return;
 
             if (collision.gameObject.GetComponent<Mouse>())
             {
-                SceneManager.LoadScene(0);
+                _level.NextLevel();
             }
         }
     }

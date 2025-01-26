@@ -1,3 +1,4 @@
+using UnityEngine;
 using MerJame.InputSystem;
 using MerJame.PlayerSystem;
 using MerJame.Spawning;
@@ -6,7 +7,7 @@ using MerJame.FinishDoor;
 using MerJame.Ghost;
 using MerJame.Obstacle;
 using MerJame.EventSystem;
-using UnityEngine;
+using MerJame.LevelSystem;
 
 namespace MerJame.Infrastructure
 {
@@ -20,17 +21,19 @@ namespace MerJame.Infrastructure
         [SerializeField] private ImporterController _mouseImporter;
         [SerializeField] private Box _box;
         [SerializeField] private LosingGame _losingGame;
+        [SerializeField] private Level _level;
 
         private PlayerInput _playerInput;
 
         private void Start()
         {
+            _level.Init();
             _playerMovement.Init(_mouseSpawnerController, _ghost);
             _box.Disable();
             _mouseSpawnerController.Init(_box);
+            _player.Init(_playerMovement, _losingGame, _mouseSpawnerController);
             _mouseImporter.Init();
-            _player.Init(_mouseImporter, _playerMovement, _losingGame);
-            _exitDoor.Init(_mouseImporter, _box);
+            _exitDoor.Init(_level, _mouseImporter.MouseDestroyer, _box);
             _playerInput = new PlayerInput(_playerMovement);
         }
 

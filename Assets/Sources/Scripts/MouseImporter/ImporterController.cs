@@ -10,15 +10,17 @@ namespace MerJame.Importer
         [SerializeField] private ImporterZone _zone;
         [SerializeField] private ImporterView _view;
         [SerializeField] private int _importCount;
+        [SerializeField] private float _importSpeed;
 
         private List<Mouse> _mouseImported;
-        private MouseDestroyer _mouseDestroyer;
+
+        public MouseDestroyer MouseDestroyer { get; private set; }
 
         public event Action Assembled;
 
         public void Init()
         {
-            _mouseDestroyer = new MouseDestroyer();
+            MouseDestroyer = new MouseDestroyer(this, _importSpeed);
             _mouseImported = new List<Mouse>();
             _view.Init(_importCount);
 
@@ -34,7 +36,7 @@ namespace MerJame.Importer
 
         private void OnEntered(Mouse mouse)
         {
-            if (_mouseDestroyer.IsDestroyed)
+            if (MouseDestroyer.IsDestroyed)
                 return;
 
             _mouseImported.Add(mouse);
@@ -42,7 +44,7 @@ namespace MerJame.Importer
 
             if (_mouseImported.Count == _importCount)
             {
-                _mouseDestroyer.Destroy(_mouseImported.ToArray());
+                MouseDestroyer.Destroy(_mouseImported.ToArray());
                 Assembled?.Invoke();
             }
         }

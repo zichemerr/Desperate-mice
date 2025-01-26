@@ -1,32 +1,56 @@
 using UnityEngine;
-using MerJame.Importer;
 using MerJame.EventSystem;
+using System.Collections.Generic;
+using MerJame.Spawning;
+using System;
 
 namespace MerJame.PlayerSystem
 {
     public class Player : MonoBehaviour
     {
-        private ImporterController _importerController;
         private PlayerMovement _playerMovement;
         private LosingGame _losingGame;
+        private MouseSpawnerController _mouseSpawner;
+        private List<Mouse> _mouses;
 
-        public void Init(ImporterController importerController, PlayerMovement playerMovement, LosingGame losingGame)
+        public event Action MouseAlived;
+
+        public void Init(PlayerMovement playerMovement, LosingGame losingGame, MouseSpawnerController mouseSpawner)
         {
-            _importerController = importerController;
             _playerMovement = playerMovement;
             _losingGame = losingGame;
-            _importerController.Assembled += OnAssembled;
+            _mouseSpawner = mouseSpawner;
+            _mouseSpawner.Spawned += OnSpawned;
+
+            _mouses = new List<Mouse>();
+
+            for (int i = 0; i < _playerMovement.MouseCount; i++)
+            {
+                OnSpawned(_playerMovement.GetMouse(i));
+            }
         }
 
         private void OnDisable()
         {
-            _importerController.Assembled -= OnAssembled;
+            _mouseSpawner.Spawned -= OnSpawned;
+
+            foreach (var mouse in _mouses)
+                mouse.Destroyed -= OnDestroyed;
         }
 
-        private void OnAssembled()
+        private void OnSpawned(Mouse mouse)
+        {
+            mouse.Destroyed += OnDestroyed;
+            _mouses.Add(mouse);
+        }
+
+        private void OnDestroyed(Mouse mouse)
         {
             if (_playerMovement.MouseCount > 0)
+            {
+                MouseAlived?.Invoke();
                 return;
+            }
 
             _losingGame.Lose();
         }

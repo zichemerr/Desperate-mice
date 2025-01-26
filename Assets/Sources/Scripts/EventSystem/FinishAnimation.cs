@@ -14,14 +14,14 @@ namespace MerJame.EventSystem
         [SerializeField] private TMP_Text _text;
         [SerializeField] private float _duration;
 
-        public float Play(string text, Color imageColor, Color textColor)
+        public WaitForSeconds Play(string text, Color imageColor, Color textColor)
         {
             _text.text = text;
             _text.color = textColor;
             _image.color = new Color(imageColor.r, imageColor.g, imageColor.b, imageColor.a);
-            _canvas.DOFade(1, _duration);
+            _canvas.DOFade(1f, _duration);
 
-            return _duration;
+            return new WaitForSeconds(_duration);
         }
 
         public void Stop(string text)

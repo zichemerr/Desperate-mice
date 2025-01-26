@@ -23,7 +23,13 @@ namespace MerJame.InputSystem
 
         public void Update()
         {
-            if (Input.GetMouseButtonDown(0))
+            //if (Input.GetMouseButtonDown(0))
+            //{
+            //    _playerMovement.Move(CursorPosition);
+            //    return;
+            //}
+
+            if (Input.GetMouseButton(0))
             {
                 _playerMovement.Move(CursorPosition);
             }
