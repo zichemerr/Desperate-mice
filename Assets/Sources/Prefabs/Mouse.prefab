@@ -217,7 +217,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d96aa99757fad8d4c8aa4886d8aa885b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _agent: {fileID: 6862888337651665631}
+  _spriteRenderer: {fileID: 3818747501295214930}
+  _soundSource:
+    _audioSource: {fileID: 0}
+    _clip: {fileID: 8300000, guid: 44ceb5b030fc2234593aa415ec7e5ac9, type: 3}
+  _stepsDelay: 0.5
   _speed: 5
 --- !u!1 &4489359799960078486
 GameObject:

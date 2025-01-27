@@ -2,6 +2,7 @@
 using MerJame.PlayerSystem;
 using MerJame.Obstacle;
 using System;
+using MerJame.SoundsSystem;
 
 namespace MerJame.Spawning
 {
@@ -10,21 +11,22 @@ namespace MerJame.Spawning
         [SerializeField] private PointSpawner[] _pointSpawner;
         [SerializeField] private Transform _spawnPoint;
         [SerializeField] private Mouse _mousePrefab;
+        [SerializeField] private SoundSource _soundSource;
 
         private MouseSpawner _spawner;
-        private Box _box;
 
         public event Action<Mouse> Spawned;
 
-        public void Init(Box box)
+        public void Init()
         {
             _spawner = new MouseSpawner(_mousePrefab);
-            _box = box;
             Spawn(_spawner.Spawn(), _spawnPoint.position);
 
             foreach (var pointSpawner in _pointSpawner)
+            {
+                pointSpawner.Init();
                 pointSpawner.Entered += OnEntered;
-
+            }
         }
 
         private void OnDisable()
@@ -43,7 +45,7 @@ namespace MerJame.Spawning
             }
 
             pointSpawner.Entered -= OnEntered;
-            _box.Enable();
+            _soundSource.Play();
         }
 
         private void Spawn(Mouse mouse, Vector2 position)

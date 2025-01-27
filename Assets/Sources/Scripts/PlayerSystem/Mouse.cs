@@ -6,21 +6,31 @@ namespace MerJame.PlayerSystem
 {
     public class Mouse : MonoBehaviour
     {
-        [SerializeField] private NavMeshAgent _agent;
+        [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private float _speed;
+
+        private NavMeshAgent _agent;
+        private Vector2 Position => transform.position;
 
         public event Action<Mouse> Destroyed;
 
         public void Init()
         {
+            _agent = GetComponent<NavMeshAgent>();
             _agent.updateRotation = false;
             _agent.updateUpAxis = false;
             _agent.speed = _speed;
         }
 
-        internal void Move(Vector2 position)
+        public void Move(Vector2 target)
         {
-            _agent.SetDestination(position);
+            _agent.SetDestination(target);
+            Vector2 direction = target - Position;
+
+            if (direction.x > 0)
+                _spriteRenderer.flipX = false;
+            else
+                _spriteRenderer.flipX = true;
         }
 
         public void SetPosition(Vector2 position)

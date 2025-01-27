@@ -4,23 +4,27 @@ using MerJame.Obstacle;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using MerJame.LevelSystem;
+using TMPro;
+using MerJame.SoundsSystem;
+using System;
+using UnityEngine.UIElements;
 
 namespace MerJame.FinishDoor
 {
     public class ExitDoor : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer _sprite;
+        [SerializeField] private TMP_Text _carpet;
+        [SerializeField] private SoundSource _soundSource;
 
         private Level _level;
         private MouseDestroyer _mouseDestroyer;
-        private Box _box;
         private bool _MouseIsAlived = false;
 
-        public void Init(Level level, MouseDestroyer mouseDestroyer, Box box)
+        public void Init(Level level, MouseDestroyer mouseDestroyer)
         {
             _level = level;
             _mouseDestroyer = mouseDestroyer;
-            _box = box;
             mouseDestroyer.AllDestroyed += OnAllDestroyed;
         }
 
@@ -32,8 +36,9 @@ namespace MerJame.FinishDoor
         private void OnAllDestroyed()
         {
             _sprite.color = Color.black;
+            _carpet.text = "Wellcome";
             _MouseIsAlived = true;
-            _box.Disable();
+            _soundSource.Play();
         }
 
         private void OnTriggerEnter2D(Collider2D collision)

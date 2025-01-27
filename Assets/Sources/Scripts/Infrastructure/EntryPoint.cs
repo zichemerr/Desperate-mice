@@ -19,21 +19,19 @@ namespace MerJame.Infrastructure
         [SerializeField] private ExitDoor _exitDoor;
         [SerializeField] private MouseGhost _ghost;
         [SerializeField] private ImporterController _mouseImporter;
-        [SerializeField] private Box _box;
-        [SerializeField] private LosingGame _losingGame;
+        [SerializeField] private GameEvents _losingGame;
         [SerializeField] private Level _level;
 
         private PlayerInput _playerInput;
 
         private void Start()
         {
-            _level.Init();
+            _level.Init(_losingGame);
             _playerMovement.Init(_mouseSpawnerController, _ghost);
-            _box.Disable();
-            _mouseSpawnerController.Init(_box);
+            _mouseSpawnerController.Init();
             _player.Init(_playerMovement, _losingGame, _mouseSpawnerController);
             _mouseImporter.Init();
-            _exitDoor.Init(_level, _mouseImporter.MouseDestroyer, _box);
+            _exitDoor.Init(_level, _mouseImporter.MouseDestroyer);
             _playerInput = new PlayerInput(_playerMovement);
         }
 

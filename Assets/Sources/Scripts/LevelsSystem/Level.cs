@@ -1,3 +1,4 @@
+using MerJame.EventSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,11 +8,13 @@ namespace MerJame.LevelSystem
     {
         [SerializeField] private int _maxScenes;
 
+        private GameEvents _gameEvents;
         private int _indexCurrentScene;
         private int _indexNextScene => _indexCurrentScene + 1;
 
-        public void Init()
+        public void Init(GameEvents gameEvents)
         {
+            _gameEvents = gameEvents;
             _indexCurrentScene = SceneManager.GetActiveScene().buildIndex;
         }
 
@@ -19,7 +22,7 @@ namespace MerJame.LevelSystem
         {
             if (_indexCurrentScene == _maxScenes)
             {
-                SceneManager.LoadScene(_maxScenes);
+                _gameEvents.Win();
                 return;
             }
 

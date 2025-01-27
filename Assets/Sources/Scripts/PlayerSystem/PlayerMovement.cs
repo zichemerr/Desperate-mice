@@ -1,4 +1,5 @@
 ﻿using MerJame.Ghost;
+using MerJame.SoundsSystem;
 using MerJame.Spawning;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ namespace MerJame.PlayerSystem
     public class PlayerMovement : MonoBehaviour
     {
         [SerializeField] private List<Mouse> _movements;
+        [SerializeField] private SoundSource _soundSource;
 
         private MouseSpawnerController _mouseSpawner;
         private MouseGhost _mouseGhost;
@@ -41,6 +43,7 @@ namespace MerJame.PlayerSystem
         {
             _movements.Remove(mouse);
             _mouseGhost.PlayAniamtion();
+            _soundSource.Play();
             Destroy(mouse.gameObject);
         }
 

@@ -9,13 +9,13 @@ namespace MerJame.PlayerSystem
     public class Player : MonoBehaviour
     {
         private PlayerMovement _playerMovement;
-        private LosingGame _losingGame;
+        private GameEvents _losingGame;
         private MouseSpawnerController _mouseSpawner;
         private List<Mouse> _mouses;
 
         public event Action MouseAlived;
 
-        public void Init(PlayerMovement playerMovement, LosingGame losingGame, MouseSpawnerController mouseSpawner)
+        public void Init(PlayerMovement playerMovement, GameEvents losingGame, MouseSpawnerController mouseSpawner)
         {
             _playerMovement = playerMovement;
             _losingGame = losingGame;

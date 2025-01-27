@@ -2,6 +2,8 @@ using UnityEngine;
 using MerJame.PlayerSystem;
 using System;
 using System.Collections.Generic;
+using MerJame.SoundsSystem;
+using Unity.VisualScripting;
 
 namespace MerJame.Importer
 {
@@ -11,6 +13,7 @@ namespace MerJame.Importer
         [SerializeField] private ImporterView _view;
         [SerializeField] private int _importCount;
         [SerializeField] private float _importSpeed;
+        [SerializeField] private SoundSource _sound;
 
         private List<Mouse> _mouseImported;
 
@@ -40,6 +43,7 @@ namespace MerJame.Importer
                 return;
 
             _mouseImported.Add(mouse);
+            _sound.Play(0.5f);
             _view.ShowValue(_mouseImported.Count);
 
             if (_mouseImported.Count == _importCount)
