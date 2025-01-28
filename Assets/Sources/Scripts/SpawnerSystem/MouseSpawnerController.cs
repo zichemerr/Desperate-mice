@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using MerJame.PlayerSystem;
-using MerJame.Obstacle;
 using System;
 using MerJame.SoundsSystem;
 

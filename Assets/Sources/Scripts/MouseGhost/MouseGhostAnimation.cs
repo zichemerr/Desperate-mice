@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace MerJame.Ghost
 {
-    public class MouseGhost : MonoBehaviour
+    public class MouseGhostAnimation : MonoBehaviour
     {
         [SerializeField] private Image _image;
 

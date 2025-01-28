@@ -6,6 +6,7 @@ namespace MerJame.InputSystem
     public class PlayerInput
     {
         private PlayerMovement _playerMovement;
+        private bool _isActive = true;
 
         public PlayerInput(PlayerMovement playerMovement)
         {
@@ -23,16 +24,18 @@ namespace MerJame.InputSystem
 
         public void Update()
         {
-            //if (Input.GetMouseButtonDown(0))
-            //{
-            //    _playerMovement.Move(CursorPosition);
-            //    return;
-            //}
+            if (_isActive == false)
+                return;
 
             if (Input.GetMouseButton(0))
             {
                 _playerMovement.Move(CursorPosition);
             }
+        }
+
+        public void Disable()
+        {
+            _isActive = false;
         }
     }
 }

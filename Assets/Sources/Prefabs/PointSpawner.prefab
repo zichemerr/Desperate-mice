@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4971785183402059086}
   - component: {fileID: 3923689003813598655}
   - component: {fileID: 9153905781078408948}
+  - component: {fileID: 8042799960543054824}
   m_Layer: 0
   m_Name: PointSpawner
   m_TagString: Untagged
@@ -84,8 +85,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee2c2ec715538af429e0910b30313e95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _pointAnimation: {fileID: 8042799960543054824}
   _point: {fileID: 4971785183402059086}
   _spawnCount: 2
+--- !u!114 &8042799960543054824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593423909818389390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8289f05eefa275b4ca34154c95153bcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _containers:
+  - <Transfrom>k__BackingField: {fileID: 7463990125542172656}
+    <Data>k__BackingField: {fileID: 11400000, guid: a9e210d0cb1d8c2459e797121878024b, type: 2}
+  - <Transfrom>k__BackingField: {fileID: 583194583454291774}
+    <Data>k__BackingField: {fileID: 11400000, guid: c75112addb03a1041906dbf92a85f898, type: 2}
 --- !u!1 &6897402898090376865
 GameObject:
   m_ObjectHideFlags: 0

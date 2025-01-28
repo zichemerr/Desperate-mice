@@ -12,11 +12,11 @@ namespace MerJame.PlayerSystem
         [SerializeField] private SoundSource _soundSource;
 
         private MouseSpawnerController _mouseSpawner;
-        private MouseGhost _mouseGhost;
+        private MouseGhostAnimation _mouseGhost;
 
         public int MouseCount => _movements.Count;
 
-        public void Init(MouseSpawnerController mouseSpawner, MouseGhost mouseGhost)
+        public void Init(MouseSpawnerController mouseSpawner, MouseGhostAnimation mouseGhost)
         {
             _mouseSpawner = mouseSpawner;
             _mouseGhost = mouseGhost;
@@ -43,7 +43,7 @@ namespace MerJame.PlayerSystem
         {
             _movements.Remove(mouse);
             _mouseGhost.PlayAniamtion();
-            _soundSource.Play();
+            _soundSource.Play(0.3f);
             Destroy(mouse.gameObject);
         }
 

@@ -1,13 +1,10 @@
 using MerJame.Importer;
 using MerJame.PlayerSystem;
-using MerJame.Obstacle;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using MerJame.LevelSystem;
 using TMPro;
 using MerJame.SoundsSystem;
 using System;
-using UnityEngine.UIElements;
 
 namespace MerJame.FinishDoor
 {
